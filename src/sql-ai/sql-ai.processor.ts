@@ -1,4 +1,9 @@
-import { InjectQueue, Process, Processor } from '@nestjs/bull';
+import {
+  InjectQueue,
+  OnQueueCompleted,
+  Process,
+  Processor,
+} from '@nestjs/bull';
 import { Logger } from '@nestjs/common';
 import { Job, Queue } from 'bull';
 
@@ -23,6 +28,17 @@ export class SqlAiProcessor {
     });
 
     this.logger.debug('Processing chat completed', {
+      transactionId: job.data.transactionId,
+    });
+
+    return { summary: 'my random summary' };
+  }
+
+  @OnQueueCompleted({
+    name: 'process-chat',
+  })
+  onChatProcessed(job: Job, result: any) {
+    this.logger.debug(`process-chat completed:${JSON.stringify(result)}`, {
       transactionId: job.data.transactionId,
     });
   }

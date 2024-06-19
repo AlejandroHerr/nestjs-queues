@@ -19,6 +19,7 @@ export class SqlAiProcessor {
 
     await this.sqlAIQueue.add('summary-generated', {
       summar: 'summary',
+      transactionId: job.data.transactionId,
     });
 
     this.logger.debug('Processing chat completed', {

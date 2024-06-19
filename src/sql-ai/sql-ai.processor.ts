@@ -13,7 +13,7 @@ export class SqlAiProcessor {
       transactionId: job.data.transactionId,
     });
 
-    if (Math.random() > 0.25) {
+    if (Math.random() < 0.25) {
       throw new Error('Error in handleProcessedChat!');
     }
 

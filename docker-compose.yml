@@ -1,0 +1,7 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: redis
+    ports:
+      - 6380:6379
